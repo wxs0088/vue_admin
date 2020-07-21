@@ -96,7 +96,7 @@ export default {
         // 退出登录
         outlogin() {
             sessionStorage.removeItem('activePath')
-            localStorage.removeItem('token')
+            localStorage.removeItem('jwt')
             this.$router.push('/login')
         }
     }

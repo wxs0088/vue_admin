@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Welcome from '@/components/Welcome'
 import Login from '@/components/Login'
 import Index from '@/components/Index'
 import Reg from '@/components/Reg'
 import Order from '@/components/WorkOrder/order'
 import Addorder from '@/components/WorkOrder/Addorder'
+import Getwork from '@/components/WorkOrder/Getwork'
 
 
 Vue.use(Router)
@@ -16,8 +18,11 @@ const router = new Router({
 			path: '/Index',
 			name: 'Index',
 			component: Index,
+			redirect:'/welcome',
 			children:[
-				,{path:'/order',component:Order},{path:'/addorder',component:Addorder}
+				,{path:'/welcome',component:Welcome}
+				,{path:'/order',component:Order},{path:'/addorder',component:Addorder},
+				{path:'/sendorder',component:Getwork},
 			// 	,{path:'/goodstype',component:Goodstype},{path:'/addtype',component:Addequip}
 			// 	,{path:'/upequip',component:Upequip},{path:'/labelinfo',component:Labels}
 			// 	,{path:'/uplabel',component:Uplabel}
@@ -47,20 +52,20 @@ const router = new Router({
 
 
 // 路由拦截
-// router.beforeEach((to, from, next) => {
-// 	// to 将要访问的路径
-// 	// from 从哪个路径跳转而来
-// 	// next 是一个函数，表示放行
-// 	// next放行的两种方式：1、直接放行next()  2、跳转放行next('/login')
-// 	// 判断是否登录
-// 	const token = localStorage.getItem('token')
+router.beforeEach((to, from, next) => {
+	// to 将要访问的路径
+	// from 从哪个路径跳转而来
+	// next 是一个函数，表示放行
+	// next放行的两种方式：1、直接放行next()  2、跳转放行next('/login')
+	// 判断是否登录
+	const token = localStorage.getItem('jwt')
 
-// 	if (to.path === '/login') return next();
-// 	if (to.path === '/reg') return next();
-// 	if (to.path === '/reverse') return next();
-// 	if (to.path === '/reverpass') return next();
-// 	if (!token) return next('/login')
-// 	next()
-// })
+	if (to.path === '/login') return next();
+	if (to.path === '/reg') return next();
+	if (to.path === '/reverse') return next();
+	if (to.path === '/reverpass') return next();
+	if (!token) return next('/login')
+	next()
+})
 
 export default router

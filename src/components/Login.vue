@@ -15,7 +15,6 @@
                 <el-form-item class="btns">
                     <el-button type="primary" @click="login">登录</el-button>
                     <el-button type="primary" @click="but">注册</el-button>
-                    <el-button type="info" icon="el-icon-message" circle @click="reversebut">找密码</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -63,9 +62,6 @@ export default {
         },
         but() {
             this.$router.push('/reg')
-        },
-        reversebut(){
-            this.$router.push('/reverse')
         },
         text() {
             test_get().then(resp => {
